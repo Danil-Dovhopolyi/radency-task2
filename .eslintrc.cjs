@@ -11,20 +11,21 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-   overrides: [
+  overrides: [
     {
-      "files": ["**/*.js"],
-      "excludedFiles": ["tailwind.config.js"]
-    }
+      files: ['**/*.js'],
+      excludedFiles: ['tailwind.config.js'],
+    },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ["./tsconfig.json",  "tsconfig.tailwind.json"],
+    project: ['./tsconfig.json', 'tsconfig.tailwind.json'],
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'react/react-in-jsx-scope': 0,
+    'react/require-default-props': 'off',
   },
 };
