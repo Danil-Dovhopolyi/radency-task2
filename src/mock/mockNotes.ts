@@ -13,7 +13,7 @@ const notes = [
     id: 2,
     createdAt: new Date('2023-07-29T08:00:00'),
     content: "Second note. Today's date.",
-    category: 'Task',
+    category: 'Idea',
     activeNote: true,
     archived: false,
     dates: '2023-08-03',

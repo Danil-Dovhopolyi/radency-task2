@@ -7,7 +7,8 @@ export interface NotesTableRowData extends IdentifiableRow {
   archived: boolean;
 }
 
-export interface SummaryTableRowData extends IdentifiableRow {
+export interface SummaryTableRowData {
+  id: string;
   noteCategory: string;
   active: number;
   archived: number;

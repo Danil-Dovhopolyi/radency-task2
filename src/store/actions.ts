@@ -5,7 +5,8 @@ export enum ActionTypes {
   DELETE_NOTE = 'DELETE_NOTE',
   INIT_STORE = 'INIT_STORE',
   SUMMARY_DATA = 'SUMMARY_DATA',
-  ARCHIVE_NOTE = 'ARCHIVE_NOTE',
+  ARCHIVE_TO_ACHIEVE = 'ARCHIVE_TO_ACHIEVE',
+  UNARCHIVE_TO_NOTES = 'UNARCHIVE_TO_NOTES',
 }
 
 export interface AddNoteAction {
@@ -13,11 +14,14 @@ export interface AddNoteAction {
   payload: NotesTableRowData;
 }
 
-export interface ArchiveNoteAction {
-  type: ActionTypes.ARCHIVE_NOTE;
+export interface ArchiveToAchieveAction {
   id: number;
+  type: ActionTypes.ARCHIVE_TO_ACHIEVE;
 }
-
+export interface UnarchieveFromAchieveAction {
+  id: number;
+  type: ActionTypes.UNARCHIVE_TO_NOTES;
+}
 export interface SummaryDataAction {
   type: ActionTypes.SUMMARY_DATA;
 }
@@ -31,13 +35,16 @@ export interface DeleteNoteAction {
   type: ActionTypes.DELETE_NOTE;
   id: number;
 }
-
+export interface ArchivedNotesState {
+  archivedNotes: NotesTableRowData[];
+}
 export type Action =
   | AddNoteAction
   | DeleteNoteAction
   | InitStoreAction
   | SummaryDataAction
-  | ArchiveNoteAction;
+  | ArchiveToAchieveAction
+  | UnarchieveFromAchieveAction;
 
 export const addNote = (note: NotesTableRowData): AddNoteAction => ({
   type: ActionTypes.ADD_NOTE,
@@ -58,7 +65,12 @@ export const addSummaryData = (): SummaryDataAction => ({
   type: ActionTypes.SUMMARY_DATA,
 });
 
-export const archiveNote = (id: number): ArchiveNoteAction => ({
-  type: ActionTypes.ARCHIVE_NOTE,
+export const archiveToAchieve = (id: number): ArchiveToAchieveAction => ({
+  type: ActionTypes.ARCHIVE_TO_ACHIEVE,
+  id,
+});
+
+export const unarchiveToNotes = (id: number): UnarchieveFromAchieveAction => ({
+  type: ActionTypes.UNARCHIVE_TO_NOTES,
   id,
 });

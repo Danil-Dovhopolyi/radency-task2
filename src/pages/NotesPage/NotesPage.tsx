@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomTable from '../../components/CustomTable';
-import { deleteNote, addSummaryData, archiveNote } from '../../store/actions';
+import {
+  deleteNote,
+  addSummaryData,
+  archiveToAchieve,
+} from '../../store/actions';
 import { AppState } from '../../store/reducer';
 
 function NotesPage() {
@@ -22,7 +26,7 @@ function NotesPage() {
   };
 
   const handleArchive = (id: number) => {
-    dispatch(archiveNote(id));
+    dispatch(archiveToAchieve(id));
   };
 
   return (
