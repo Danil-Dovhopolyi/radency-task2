@@ -5,7 +5,6 @@ import { ActionTypes, Action } from './actions';
 import { NotesTableRowData, SummaryTableRowData } from '../types/types';
 import notes from '../mock/mockNotes';
 
-// Define the predefined categories
 const predefinedCategories = ['Task', 'Random Thought', 'Idea'];
 
 export interface AppState {
@@ -111,24 +110,7 @@ const appReducer = (
           [...state.archivedNotes, updatedNote]
         ),
       };
-    case ActionTypes.UNARCHIVE_TO_NOTES:
-      return {
-        ...state,
-        notes: state.notes.map((note) =>
-          note.id === action.id
-            ? { ...note, archived: false, activeNote: true }
-            : note
-        ),
-        archivedNotes: state.archivedNotes.filter(
-          (note) => note.id !== action.id
-        ),
-        summaryData: calculateSummaryData(
-          state.notes.map((note) =>
-            note.id === action.id ? { ...note, archived: false } : note
-          ),
-          state.archivedNotes.filter((note) => note.id !== action.id)
-        ),
-      };
+
     case ActionTypes.INIT_STORE:
       return {
         ...state,
@@ -138,6 +120,17 @@ const appReducer = (
           defaultNotes.filter((note) => note.archived)
         ),
         archivedNotes: defaultNotes.filter((note) => note.archived),
+      };
+    case ActionTypes.EDIT_NOTE:
+      const { id, content, category } = action.payload;
+      const updatedNotes = state.notes.map((note) =>
+        note.id === id ? { ...note, content, category } : note
+      );
+
+      return {
+        ...state,
+        notes: updatedNotes,
+        summaryData: calculateSummaryData(updatedNotes, state.archivedNotes),
       };
     case ActionTypes.SUMMARY_DATA:
       return {
